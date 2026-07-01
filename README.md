@@ -1,6 +1,8 @@
 # SQL-Scripts
 Data cleaning for the COVID-19 dataset from January to August 2020
 
+
+Step 1 ..
 -- Check how many rows were imported
 SELECT COUNT(*) FROM covid_data;
 
@@ -12,6 +14,8 @@ SELECT
     SUM(CASE WHEN province IS NULL THEN 1 ELSE 0 END) AS null_province,
     SUM(CASE WHEN recovered IS NULL THEN 1 ELSE 0 END) AS null_recovered
 FROM covid_data;
+
+Step 2.. 
 
 UPDATE covid_data
 SET province = 'N/A'
@@ -30,6 +34,7 @@ UPDATE covid_data SET clean_date = STR_TO_DATE(report_date, '%Y-%m-%d');
 ALTER TABLE covid_data DROP COLUMN report_date;
 ALTER TABLE covid_data RENAME COLUMN clean_date TO report_date;
 
+Step 3 ...
 -- Confirm no more NULLs
 SELECT 
     SUM(CASE WHEN province IS NULL THEN 1 ELSE 0 END) AS null_province,
